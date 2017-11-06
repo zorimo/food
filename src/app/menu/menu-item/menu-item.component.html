@@ -1,0 +1,32 @@
+<div class="card menu-item-card">
+    <div class="card-img-top" [style.backgroundImage]="'url(' + menuItem.image + ')'"></div>
+    <div class="card-block">
+        <h6 class="card-title" style="text-align:right;color:#ce5c5c">{{ menuItem.price }} {{ menuItem.currency }}</h6>
+        <h4 class="card-title">{{ menuItem.name }}
+            <small>{{ menuItem.type }}</small>
+        </h4>
+        <p class="card-text">{{ menuItem.description }}</p>
+        <p class="card-text">
+            <small class="text-muted">
+                <section class="qty">
+                    <div>
+                        <input name="quantity" [(ngModel)]="menuItem.quantity" #quantity
+                               (ngModelChange)="menuItemEdit(menuItem)" type="number" min="1">
+                        <div class="controls-wrapper">
+                            <a href="javascript:void(0);" class="minus"
+                               (click)="menuItem.quantity=menuItem.quantity-1;menuItemEdit(menuItem);">-</a>
+                            <a href="javascript:void(0);" class="plus"
+                               (click)="menuItem.quantity=menuItem.quantity+1;menuItemEdit(menuItem);">+</a>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-info" data-toggle="modal" data-target="#cartModal"
+                                [disabled]="menuItem.quantity < 1"
+                                (click)="addToCart()">Add
+                        </button>
+                    </div>
+                </section>
+            </small>
+        </p>
+    </div>
+</div>

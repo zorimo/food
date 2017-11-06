@@ -1,0 +1,61 @@
+<div class="container">
+    <h1>Shopping Cart</h1>
+
+    <div class="shopping-cart">
+
+        <div class="column-labels">
+            <label class="product-image">Image</label>
+            <label class="product-details">Product</label>
+            <label class="product-price">Price</label>
+            <label class="product-quantity">Quantity</label>
+            <label class="product-removal">Remove</label>
+            <label class="product-line-price">Total</label>
+        </div>
+
+        <ng-container *ngIf="isMenuItems; else cartIsEmpty">
+            <ng-container *ngFor="let menuItem of menuItems; trackBy: trackByFn">
+                <div class="product">
+                    <div class="product-image">
+                        <div [style.backgroundImage]="'url(' + menuItem.image + ')'"></div>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-title">{{ menuItem.name }}
+                            <small>{{ menuItem.type }}</small>
+                        </div>
+                        <p class="product-description">{{ menuItem.description }}</p>
+                    </div>
+                    <div class="product-price">{{ menuItem.currency + menuItem.price }}</div>
+                    <div class="product-quantity">
+                        <input name="quantity" [(ngModel)]="menuItem.quantity" type="number" min="1"
+                               (ngModelChange)="menuItemEdit(menuItem)" #quantity name="quantity">
+                    </div>
+                    <div class="product-removal">
+                        <button class="remove-product" (click)="onRemove(menuItem.id)">
+                            Remove
+                        </button>
+                    </div>
+                    <div class="product-line-price">{{ menuItem.totalPrice }}</div>
+                </div>
+            </ng-container>
+
+            <div class="totals">
+                <div class="totals-item totals-item-total">
+                    <label>Grand Total</label>
+                    <div class="totals-value" id="cart-total">{{ grandTotalPrice }}</div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="bottom-panel">
+                <button class="btn btn-primary" routerLink="/">Continue shopping</button>
+                <button class="btn btn-success">Order</button>
+            </div>
+        </ng-container>
+
+        <ng-template #cartIsEmpty>
+            <button class="btn btn-primary" routerLink="/">Continue shopping</button>
+            <h3 class="text-center">Cart is empty</h3>
+        </ng-template>
+
+    </div>
+</div>

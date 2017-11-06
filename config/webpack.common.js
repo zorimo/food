@@ -31,7 +31,7 @@ const ngcWebpack = require('ngc-webpack');
 const HMR = helpers.hasProcessFlag('hot');
 const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot');
 const METADATA = {
-  title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
+  title: 'Menu of dishes',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer(),
   HMR: HMR,
@@ -234,6 +234,7 @@ module.exports = function (options) {
         Tab: "exports-loader?Tab!bootstrap/js/dist/tab",
         Tooltip: "exports-loader?Tooltip!bootstrap/js/dist/tooltip",
         Util: "exports-loader?Util!bootstrap/js/dist/util",
+        Popper: ['popper.js', 'default'],
       }),
 
       /**

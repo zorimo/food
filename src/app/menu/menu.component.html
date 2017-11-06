@@ -1,0 +1,57 @@
+<div class="container-fluid main-container">
+    <div class="row">
+        <div class="col-md-2">
+
+            <div class="form-group">
+                <label for="search">Search</label>
+                <input type="text" class="form-control" #sch
+                       name="search" ngModel (ngModelChange)="search(sch.value, course.value)" id="search"
+                       placeholder="Search">
+            </div>
+
+            <div class="form-group">
+                <label for="course">Course</label>
+                <select class="form-control" id="course" #course
+                        ngModel (ngModelChange)="search(sch.value, course.value)" name="course">
+                    <option></option>
+                    <option>Snacks</option>
+                    <option>Desserts</option>
+                    <option>Drinks</option>
+                    <option>Main courses</option>
+                </select>
+            </div>
+
+            <a routerLink="/cart" class="btn btn-info btn-lg" style="width: 100%;">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Cart
+            </a>
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <ng-container *ngFor="let menuItem of menuItems; trackBy: trackByFn">
+                    <div class="col-sm-6 col-md-6 col-lg-4 menu-item">
+                        <menu-item [menuItem]="menuItem"></menu-item>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cartModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>You have added a dish to the <a routerLink="/cart" data-dismiss="modal">cart</a></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
